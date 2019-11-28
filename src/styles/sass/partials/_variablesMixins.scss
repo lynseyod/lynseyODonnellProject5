@@ -1,0 +1,16 @@
+$main: #ff8551; //coral
+$mainDark: #ec4e20; //flame
+$mainLight: #fec0aa; //melon
+$black: #2e3532; //jet
+$white: #f8f4ed; //seashell
+
+@import url('https://fonts.googleapis.com/css?family=Petit+Formal+Script|Quicksand&display=swap');
+$font: 'Quicksand', sans-serif;
+$funFont: 'Petit Formal Script', cursive;
+
+//mixinsssss
+@mixin mqTablet {
+  @media(min-width: 400px) {
+    @content;
+  }
+}

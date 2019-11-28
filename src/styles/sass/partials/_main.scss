@@ -1,0 +1,49 @@
+.newAddy {
+  position: absolute;
+  right: 0;
+  top: -50px;
+  i {
+    font-size: 2rem;
+  }
+}
+
+.addressContainer {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: repeat(10, 10%);
+  margin: 2% 0;
+  padding: 3%;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid $black;
+  background-color: $mainLight;
+  color: $black;
+  .profilePic {
+    background-color: $white;
+    border-radius: 50%;
+    padding: 2%;
+    border: 1px solid $black;
+    grid-row: 1 / 5;
+  }
+  h2 {
+    grid-row: 1 / 5;
+    text-align: right;
+    color: $mainDark;
+  }
+  .contactInfo {
+    & ~ p {
+      grid-column: 1 / 3;
+    }
+  }
+  span {
+    font-weight: bold;
+  }
+  i {
+    color: $mainDark;
+    margin-right: 2%;
+  }
+}
+
+.addressContainer:first-of-type {
+  margin-top: 0;
+}

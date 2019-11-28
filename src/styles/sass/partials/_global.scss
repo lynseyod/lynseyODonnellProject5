@@ -1,0 +1,53 @@
+html {
+  font-size: 125%;
+}
+
+body {
+  background-color: $main;
+  font-family: $font;
+  color: $white;
+}
+
+.wrapper {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+h1,
+h2,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2 {
+  font-family: $funFont;
+}
+
+h1 {
+  font-size: 1.7rem; // 34px if html = 20px
+}
+
+h2 {
+  font-size: 1.35rem; // 27px
+}
