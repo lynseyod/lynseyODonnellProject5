@@ -194,7 +194,6 @@ body {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  position: relative;
 }
 
 h1,
@@ -280,14 +279,87 @@ header h1 {
   margin: 0 auto;
 }
 
-.newAddy {
-  position: absolute;
-  right: 0;
-  top: -50px;
+main {
+  position: relative;
 }
 
-.newAddy i {
+button.newAddy {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -55px;
+  right: 5px;
+}
+
+button.newAddy i {
+  color: #ec4e20;
   font-size: 2rem;
+  text-shadow: 2px 2px 5px #f8f4ed;
+}
+
+button.newAddy:hover::before, button.newAddy:focus::before {
+  content: 'New contact';
+  color: #f8f4ed;
+  font-size: 1.2rem;
+  position: relative;
+  top: -7px;
+  right: 10px;
+}
+
+form {
+  position: absolute;
+  width: 100%;
+  border: 2px solid #2e3532;
+  border-radius: 10px;
+  background-color: #fec0aa;
+  padding: 2%;
+}
+
+form label {
+  color: #ec4e20;
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+
+form input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ec4e20;
+  border-left: 1px solid #ec4e20;
+  border-right: 1px solid #ec4e20;
+  border-radius: 10px;
+  margin-bottom: 10px 0;
+  padding: 10px;
+  background-color: #f8f4ed;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(30%, #f8f4ed), to(#fec0aa));
+  background-image: linear-gradient(to top, #f8f4ed 30%, #fec0aa);
+  color: #2e3532;
+}
+
+form input:focus {
+  background-image: none;
+  -webkit-box-shadow: 2px 2px 5px #ec4e20;
+          box-shadow: 2px 2px 5px #ec4e20;
+}
+
+form button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  border: 1px solid #ec4e20;
+  border-radius: 10px;
+  background-color: #ec4e20;
+  color: #f8f4ed;
+}
+
+form button:hover, form button:focus {
+  background-color: #fec0aa;
+  color: #ec4e20;
+  -webkit-box-shadow: 2px 2px 5px #ec4e20;
+          box-shadow: 2px 2px 5px #ec4e20;
 }
 
 .addressContainer {

@@ -17,6 +17,8 @@ class App extends Component {
       company: "",
       contactedVia: "",
       lastContacted: "",
+      buttonClicks: 0,
+      displayForm: false,
     }
   }
 
@@ -38,6 +40,22 @@ class App extends Component {
         contacts: contactsArray
       })
     })
+  }
+
+  handleClick = () => {
+    this.setState({
+      buttonClicks: this.state.buttonClicks + 1,
+    })
+
+    if (this.state.buttonClicks % 2 === 0) {
+      this.setState({
+        displayForm: true
+      })
+    } else {
+      this.setState({
+        displayForm: false
+      })
+    }
   }
 
   formSubmit = (event) => {
@@ -68,9 +86,10 @@ class App extends Component {
     
     return (
       <div className="wrapper">
-
         <Header />
         <main>
+          <button className="newAddy" onClick={this.handleClick}><i class="fas fa-plus-circle"></i></button>
+          {this.state.displayForm ? <Form addContact={this.formSubmit} inputChange={this.inputChange}/> : null}
           <ul>
             {this.state.contacts.map( (contactVal, index) => {
               const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = contactVal.contactObj;
@@ -90,7 +109,6 @@ class App extends Component {
             })}
           </ul>
         </main>
-        <Form addContact={this.formSubmit} inputChange={this.inputChange}/>
       </div>
     );
   }
