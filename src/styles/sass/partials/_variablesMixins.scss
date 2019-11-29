@@ -9,8 +9,20 @@ $font: 'Quicksand', sans-serif;
 $funFont: 'Petit Formal Script', cursive;
 
 //mixinsssss
+@mixin mq500 {
+  @media(min-width: 500px) {
+    @content;
+  }
+}
+
 @mixin mqTablet {
-  @media(min-width: 400px) {
+  @media(min-width: 750px) {
+    @content;
+  }
+}
+
+@mixin mqTabLayout {
+  @media(min-width: 1000px) {
     @content;
   }
 }

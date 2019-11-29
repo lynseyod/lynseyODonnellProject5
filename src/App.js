@@ -17,7 +17,6 @@ class App extends Component {
       company: "",
       contactedVia: "",
       lastContacted: "",
-      buttonClicks: 0,
       displayForm: false,
     }
   }
@@ -42,18 +41,14 @@ class App extends Component {
     })
   }
 
-  handleClick = () => {
-    this.setState({
-      buttonClicks: this.state.buttonClicks + 1,
-    })
-
-    if (this.state.buttonClicks % 2 === 0) {
+  handleClick = (event) => {
+    if (this.state.displayForm) {
       this.setState({
-        displayForm: true
+        displayForm: false
       })
     } else {
       this.setState({
-        displayForm: false
+        displayForm: true
       })
     }
   }
@@ -69,8 +64,10 @@ class App extends Component {
     userInput.company = company;
     userInput.contactedVia = contactedVia;
     userInput.lastContacted = lastContacted;
-    console.log(userInput);
     dbRef.push(userInput);
+    this.setState({
+      displayForm: false
+    })
   }
 
   inputChange = (event) => {
@@ -88,7 +85,7 @@ class App extends Component {
       <div className="wrapper">
         <Header />
         <main>
-          <button className="newAddy" onClick={this.handleClick}><i class="fas fa-plus-circle"></i></button>
+          <button className="newAddy" onClick={this.handleClick}><i className="fas fa-plus-circle"></i></button>
           {this.state.displayForm ? <Form addContact={this.formSubmit} inputChange={this.inputChange}/> : null}
           <ul>
             {this.state.contacts.map( (contactVal, index) => {
@@ -109,6 +106,9 @@ class App extends Component {
             })}
           </ul>
         </main>
+        <footer>
+          <p><i class="far fa-copyright"></i> 2019 Lynsey O'Donnell</p>
+        </footer>
       </div>
     );
   }

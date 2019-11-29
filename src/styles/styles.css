@@ -279,8 +279,38 @@ header h1 {
   margin: 0 auto;
 }
 
+@media (min-width: 750px) {
+  header nav ul {
+    width: 30%;
+  }
+}
+
 main {
   position: relative;
+}
+
+@media (min-width: 1000px) {
+  main ul {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  main ul li {
+    width: 50%;
+    padding: 1% 0;
+  }
+  main ul li:nth-of-type(2n+1) {
+    padding-right: 1%;
+  }
+  main ul li:nth-of-type(2n) {
+    padding-left: 1%;
+  }
+  main ul li .addressContainer {
+    height: 100%;
+  }
 }
 
 button.newAddy {
@@ -367,8 +397,8 @@ form button:hover, form button:focus {
   display: grid;
   -ms-grid-columns: 30% 70%;
       grid-template-columns: 30% 70%;
-  -ms-grid-rows: (10%)[10];
-      grid-template-rows: repeat(10, 10%);
+  -ms-grid-rows: 15% 15% (calc(70% / 4))[4];
+      grid-template-rows: 15% 15% repeat(4, calc(70% / 4));
   margin: 2% 0;
   padding: 3%;
   width: 100%;
@@ -379,21 +409,27 @@ form button:hover, form button:focus {
 }
 
 .addressContainer .profilePic {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1 / 3;
+}
+
+.addressContainer .profilePic img {
   background-color: #f8f4ed;
   border-radius: 50%;
   padding: 2%;
   border: 1px solid #2e3532;
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 4;
-  grid-row: 1 / 5;
 }
 
 .addressContainer h2 {
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 4;
-  grid-row: 1 / 5;
   text-align: right;
   color: #ec4e20;
+}
+
+.addressContainer .contactInfo {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / 3;
 }
 
 .addressContainer .contactInfo ~ p {
@@ -411,10 +447,54 @@ form button:hover, form button:focus {
   margin-right: 2%;
 }
 
+@media (min-width: 500px) {
+  .addressContainer h2 {
+    text-align: left;
+    margin-left: 2%;
+  }
+  .addressContainer .contactInfo {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / 3;
+    -ms-grid-row: 2;
+    -ms-grid-row-span: 1;
+    grid-row: 2 / 3;
+    margin-left: 2%;
+  }
+}
+
+@media (min-width: 750px) {
+  .addressContainer .profilePic {
+    grid-row: span 6;
+  }
+  .addressContainer .contactInfo,
+  .addressContainer .contactInfo ~ p {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2 / 3;
+  }
+}
+
+@media (min-width: 1000px) {
+  .addressContainer {
+    -ms-grid-rows: (1fr)[6];
+        grid-template-rows: repeat(6, 1fr);
+  }
+  .addressContainer .profilePic {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 6;
+    grid-row: 1 / span 6;
+  }
+  .addressContainer p {
+    margin-left: 2%;
+  }
+}
+
 .addressContainer:first-of-type {
   margin-top: 0;
 }
 
 footer {
+  padding-top: 2%;
   text-align: center;
 }
