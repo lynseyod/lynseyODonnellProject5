@@ -85,7 +85,9 @@ class App extends Component {
       <div className="wrapper">
         <Header />
         <main>
-          <button className="newAddy" onClick={this.handleClick}><i className="fas fa-plus-circle"></i></button>
+          <button className="newAddy" onClick={this.handleClick}>
+            {this.state.displayForm ? <i class="fas fa-times-circle"></i> : <i className="fas fa-plus-circle"></i>}
+          </button>
           {this.state.displayForm ? <Form addContact={this.formSubmit} inputChange={this.inputChange}/> : null}
           <ul>
             {this.state.contacts.map( (contactVal, index) => {

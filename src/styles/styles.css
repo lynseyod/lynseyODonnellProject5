@@ -281,7 +281,7 @@ header h1 {
 
 @media (min-width: 750px) {
   header nav ul {
-    width: 30%;
+    width: 25%;
   }
 }
 
@@ -297,6 +297,9 @@ main {
     display: flex;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   main ul li {
     width: 50%;
@@ -390,6 +393,16 @@ form button:hover, form button:focus {
   color: #ec4e20;
   -webkit-box-shadow: 2px 2px 5px #ec4e20;
           box-shadow: 2px 2px 5px #ec4e20;
+}
+
+@media (min-width: 1000px) {
+  form {
+    width: 50%;
+    left: 50%;
+    top: -15%;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+  }
 }
 
 .addressContainer {
