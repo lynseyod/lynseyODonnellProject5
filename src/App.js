@@ -86,7 +86,7 @@ class App extends Component {
         <Header />
         <main>
           <button className="newAddy" onClick={this.handleClick}>
-            {this.state.displayForm ? <i class="fas fa-times-circle"></i> : <i className="fas fa-plus-circle"></i>}
+            {this.state.displayForm ? <i className="fas fa-times-circle"></i> : <i className="fas fa-plus-circle"></i>}
           </button>
           {this.state.displayForm ? <Form addContact={this.formSubmit} inputChange={this.inputChange}/> : null}
           <ul>
@@ -109,7 +109,7 @@ class App extends Component {
           </ul>
         </main>
         <footer>
-          <p><i class="far fa-copyright"></i> 2019 Lynsey O'Donnell</p>
+          <p><i className="far fa-copyright"></i> 2019 Lynsey O'Donnell</p>
         </footer>
       </div>
     );

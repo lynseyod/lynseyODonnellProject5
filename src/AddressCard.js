@@ -2,6 +2,9 @@ import React from 'react';
 
 const AddressCard = (props) => {
   const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = props;
+  const robotDate = new Date(lastContacted);
+  const humanDate = `${robotDate.getUTCFullYear()}/${robotDate.getUTCMonth()}/${robotDate.getUTCDate()}`;
+  console.log(humanDate);
   return (
     <div className="addressContainer">
       <div className="profilePic">
@@ -11,7 +14,7 @@ const AddressCard = (props) => {
       <p className="contactInfo">{contactMain}</p>
       <p><span className="info">Company: </span>{company}</p>
       <p><span className="info">Connected Via: </span>{contactedVia}</p>
-      <p><span className="info">Last Contacted: </span>{lastContacted}</p>
+      <p><span className="info">Last Contacted: </span>{humanDate}</p>
     </div>
   )
 };
