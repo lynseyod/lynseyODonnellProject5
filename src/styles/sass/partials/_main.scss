@@ -23,6 +23,35 @@ main {
   }
 }
 
+.sortLabel {
+  display: block;
+  @include mqTablet {
+    margin: 0;
+  }
+  @include mqTabLayout {
+    display: inline-block;
+  }
+}
+
+.sortButton {
+  border: 1px solid $white;
+  border-radius: 10px;
+  color: $white;
+  background-color: $mainDark;
+  padding: 5px 10px;
+  margin: 5px 0;
+  display: block;
+  &:hover,
+  &:focus {
+    background-color: $main;
+    box-shadow: 2px 2px 5px $white;
+  }
+  @include mqTablet {
+    display: inline-block;
+    margin: 5px;
+  }
+}
+
 button.newAddy{
   background: none;
   border: none;

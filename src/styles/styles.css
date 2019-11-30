@@ -316,6 +316,45 @@ main {
   }
 }
 
+.sortLabel {
+  display: block;
+}
+
+@media (min-width: 750px) {
+  .sortLabel {
+    margin: 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  .sortLabel {
+    display: inline-block;
+  }
+}
+
+.sortButton {
+  border: 1px solid #f8f4ed;
+  border-radius: 10px;
+  color: #f8f4ed;
+  background-color: #ec4e20;
+  padding: 5px 10px;
+  margin: 5px 0;
+  display: block;
+}
+
+.sortButton:hover, .sortButton:focus {
+  background-color: #ff8551;
+  -webkit-box-shadow: 2px 2px 5px #f8f4ed;
+          box-shadow: 2px 2px 5px #f8f4ed;
+}
+
+@media (min-width: 750px) {
+  .sortButton {
+    display: inline-block;
+    margin: 5px;
+  }
+}
+
 button.newAddy {
   background: none;
   border: none;
