@@ -14,7 +14,7 @@ const Form = (props) => {
       <label htmlFor="contactedVia">Contacted via:</label>
       <input id="contactedVia" type="text" onChange={props.inputChange}/>
       <label htmlFor="lastContacted">Last Contacted:</label>
-      <input id="lastContacted" type="text" onChange={props.inputChange}/>
+      <input id="lastContacted" type="date" onChange={props.inputChange}/>
       <button type="submit">Submit</button>
     </form>
   )

@@ -59,7 +59,7 @@ class App extends Component {
     const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = this.state
     const userInput = {};
     userInput.firstName = firstName;
-    userInput.lastName = lastName;
+    userInput.lastName = lastName; //this needs to be capitalized
     userInput.contactMain = contactMain;
     userInput.company = company;
     userInput.contactedVia = contactedVia;
@@ -79,12 +79,57 @@ class App extends Component {
     })
   }
 
+  clickSort = (e) => {
+    const toSortBy = e.target.id;
+    const fuckingFakeArray = [...this.state.contacts];
+    const arrayToSort = fuckingFakeArray.map((contact) => {
+      return contact.contactObj[toSortBy];
+    })
+    const testAThing = arrayToSort.sort();
+    const sortedArrayQuestionMark = [];
+// let's fucking pseudo code this shit ok
+//  for each item in testAThing:
+//    find it in fuckingFakeArray.contactobj[toSortBy]
+//    if contactID of thing is NOT in sortedArrayQuestionMark:
+//      push to sortedArrayQuestionMark
+
+// MOTHERFUCKING NESTED FOR LOOPS
+
+  testAThing.forEach((sortedThing) => {
+    let shouldIAddIt = true
+      // test it against each item in fuckingFakeArray
+      fuckingFakeArray.forEach((fuckingFakeContact) => {
+        if(fuckingFakeContact.contactObj[toSortBy] === sortedThing) {
+          if (sortedArrayQuestionMark.length === 0) {
+            shouldIAddIt = true;
+          } else {
+            sortedArrayQuestionMark.forEach((sortedContact) => {
+              if (sortedContact.contactId === fuckingFakeContact.contactId) {
+                shouldIAddIt = false;
+              }
+            })
+          }
+          if (shouldIAddIt) {
+            sortedArrayQuestionMark.push(fuckingFakeContact);
+          }
+          this.setState({
+            contacts: sortedArrayQuestionMark
+          })
+        }
+      })
+    })
+  }
+
   render() {
     
     return (
       <div className="wrapper">
         <Header />
         <main>
+          <h3>Sort by:</h3>
+          <button id="lastContacted" onClick={this.clickSort}>Last Contacted</button>
+          <button id="lastName" onClick={this.clickSort}>Last Name</button>
+          <button id="company" onClick={this.clickSort}>Company</button>
           <button className="newAddy" onClick={this.handleClick}>
             {this.state.displayForm ? <i className="fas fa-times-circle"></i> : <i className="fas fa-plus-circle"></i>}
           </button>
