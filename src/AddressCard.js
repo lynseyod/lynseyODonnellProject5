@@ -1,10 +1,12 @@
 import React from 'react';
+import firebase from './firebase.js'
 
 const AddressCard = (props) => {
-  const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = props;
+  const {firstName, lastName, contactMain, company, contactedVia, lastContacted, buttonId, editIt} = props;
 
-  const handleClick = () => {
-    console.log("WHY IS THIS SO HARD?!")
+  const handleClick = (event) => {
+    const thisThing = event.target.id;
+    editIt(thisThing);
   }
 
   return (
@@ -17,7 +19,7 @@ const AddressCard = (props) => {
       <p><span className="info">Company: </span>{company}</p>
       <p><span className="info">Connected Via: </span>{contactedVia}</p>
       <p><span className="info">Last Contacted: </span>{lastContacted}</p>
-      <button className="update"><i className="fas fa-pencil-alt"></i>Update info</button>
+      <button className="update" onClick={handleClick} id={buttonId}><i className="fas fa-pencil-alt"></i>Update info</button>
     </div>
   )
 };

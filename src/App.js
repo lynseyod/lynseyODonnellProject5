@@ -42,7 +42,7 @@ class App extends Component {
     })
   }
 
-  handleClick = (event) => {
+  handleClickMainForm = (event) => {
     if (this.state.displayForm) {
       this.setState({
         displayForm: false
@@ -114,6 +114,14 @@ class App extends Component {
     })
   }
 
+  clickTheEditButton = (whatClicked) => {
+    this.state.contacts.forEach((contact) => {
+      if (contact.contactId === whatClicked) {
+        console.log(contact);
+      }
+    })
+  }
+  
   render() {
     
     return (
@@ -124,7 +132,7 @@ class App extends Component {
           <button className="sortButton" id="lastContacted" onClick={this.clickSort}>Last Contacted</button>
           <button className="sortButton" id="lastName" onClick={this.clickSort}>Last Name</button>
           <button className="sortButton" id="company" onClick={this.clickSort}>Company</button>
-          <button className="newAddy" onClick={this.handleClick}>
+          <button className="newAddy" onClick={this.handleClickMainForm}>
             {this.state.displayForm ? <i className="fas fa-times-circle"></i> : <i className="fas fa-plus-circle"></i>}
           </button>
           {this.state.displayForm ? <Form addContact={this.formSubmit} inputChange={this.inputChange}/> : null}
@@ -141,6 +149,8 @@ class App extends Component {
                     company={company}
                     contactedVia={contactedVia}
                     lastContacted={lastContacted}
+                    buttonId={contactVal.contactId}
+                    editIt={this.clickTheEditButton}
                   />
                 </li>
               )
