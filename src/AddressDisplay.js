@@ -1,11 +1,7 @@
 import React from 'react';
 
-const AddressCard = (props) => {
+const AddressDisplay = (props) => {
   const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = props;
-
-  const handleClick = () => {
-    console.log("WHY IS THIS SO HARD?!")
-  }
 
   return (
     <div className="addressContainer">
@@ -17,9 +13,8 @@ const AddressCard = (props) => {
       <p><span className="info">Company: </span>{company}</p>
       <p><span className="info">Connected Via: </span>{contactedVia}</p>
       <p><span className="info">Last Contacted: </span>{lastContacted}</p>
-      <button className="update"><i className="fas fa-pencil-alt"></i>Update info</button>
     </div>
   )
 };
 
-export default AddressCard;
+export default AddressDisplay;

@@ -524,6 +524,13 @@ form button:hover, form button:focus {
   margin-right: 2%;
 }
 
+.addressContainer button {
+  background: none;
+  border: none;
+  text-align: right;
+  font-weight: bold;
+}
+
 @media (min-width: 500px) {
   .addressContainer h2 {
     text-align: left;

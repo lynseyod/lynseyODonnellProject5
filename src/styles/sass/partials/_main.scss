@@ -180,6 +180,12 @@ form {
     color: $mainDark;
     margin-right: 2%;
   }
+  button {
+    background: none;
+    border: none;
+    text-align: right;
+    font-weight: bold;
+  }
   @include mq500 {
     h2 {
       text-align: left;
