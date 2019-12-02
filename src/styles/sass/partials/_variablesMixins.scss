@@ -4,11 +4,15 @@ $mainLight: #ffbea7; //melon
 $black: #131615; //jet
 $white: #faf6f0; //seashell
 
+//fonts!
 @import url('https://fonts.googleapis.com/css?family=Petit+Formal+Script|Quicksand&display=swap');
 $font: 'Quicksand', sans-serif;
 $funFont: 'Petit Formal Script', cursive;
 
-//mixinsssss
+//mixins
+
+
+// media queries!
 @mixin mq500 {
   @media(min-width: 500px) {
     @content;

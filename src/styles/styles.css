@@ -196,6 +196,12 @@ body {
   margin: 0 auto;
 }
 
+button {
+  background: none;
+  border: none;
+  font-weight: bold;
+}
+
 h1,
 h2,
 ul,
@@ -384,6 +390,7 @@ form {
   background-color: #ffbea7;
   border-radius: 10px;
   padding: 2%;
+  z-index: 10;
 }
 
 form label {
@@ -422,6 +429,16 @@ form button:hover, form button:focus {
           box-shadow: 5px 5px #550000;
 }
 
+form p {
+  color: #550000;
+}
+
+@media (min-width: 1000px) {
+  form {
+    width: 50%;
+  }
+}
+
 form.newContact {
   position: absolute;
   right: 50px;
@@ -431,13 +448,6 @@ form.newContact {
   overflow: hidden;
   -webkit-animation: slideOut 1s;
           animation: slideOut 1s;
-  z-index: 10;
-}
-
-@media (min-width: 1000px) {
-  form.newContact {
-    width: 50%;
-  }
 }
 
 @-webkit-keyframes slideOut {
@@ -464,7 +474,8 @@ form.newContact {
 
 form.editForm {
   margin: 10px 0;
-  border: 1px solid #131615;
+  border: 2px solid #ff4800;
+  position: absolute;
 }
 
 .addressContainer {
@@ -520,12 +531,6 @@ form.editForm {
 .addressContainer i {
   color: #550000;
   margin-right: 2%;
-}
-
-.addressContainer button {
-  background: none;
-  border: none;
-  font-weight: bold;
 }
 
 .addressContainer .deleteThis {
