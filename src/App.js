@@ -20,6 +20,7 @@ class App extends Component {
       contactedVia: "",
       lastContacted: "",
       displayForm: false, //toggled to display main form
+      formError: false, //toggled to display error message!
       editContactForm: "", //will be filled with contactId
     }
   }
@@ -58,24 +59,37 @@ class App extends Component {
 
   formSubmit = (event) => {
     event.preventDefault();
+    
     const dbRef = firebase.database().ref();
     const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = this.state
     const userInput = {};
-    userInput.firstName = firstName;
-    userInput.lastName = lastName; //this needs to be capitalized
-    userInput.contactMain = contactMain;
-    userInput.company = company;
-    userInput.contactedVia = contactedVia;
-    userInput.lastContacted = lastContacted;
-    dbRef.push(userInput);
+    if (firstName !== "" && lastName !== "" && contactMain !== "" && company !== "" && contactedVia !== "" && lastContacted !== "") {
+      userInput.firstName = firstName;
+      userInput.lastName = lastName; //this needs to be capitalized
+      userInput.contactMain = contactMain;
+      userInput.company = company;
+      userInput.contactedVia = contactedVia;
+      userInput.lastContacted = lastContacted;
+      dbRef.push(userInput);
+      this.setState({
+        displayForm: false,
+        firstName: "",
+        lastName: "",
+        contactMain: "",
+        company: "",
+        contactedVia: "",
+        lastContacted: "",
+      })
+    } else {
+      this.setState({
+        formError: true
+      })
+    }
+  }
+
+  dismissError = () => {
     this.setState({
-      displayForm: false,
-      firstName: "",
-      lastName: "",
-      contactMain: "",
-      company: "",
-      contactedVia: "",
-      lastContacted: "",
+      formError: false
     })
   }
 
@@ -178,6 +192,8 @@ class App extends Component {
             <Form 
               addContact={this.formSubmit}
               inputChange={this.inputChange}
+              errorMessage={this.state.formError}
+              dismissMe={this.dismissError}
             />
             : null}
           <ul>

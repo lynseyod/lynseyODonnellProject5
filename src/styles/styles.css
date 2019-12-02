@@ -185,9 +185,9 @@ html {
 }
 
 body {
-  background-color: #ff8551;
+  background-color: #550000;
   font-family: "Quicksand", sans-serif;
-  color: #f8f4ed;
+  color: #faf6f0;
 }
 
 .wrapper {
@@ -261,7 +261,8 @@ header nav {
 
 header nav .logo {
   font-family: "Petit Formal Script", cursive;
-  text-shadow: 1px 1px 2px #f8f4ed;
+  font-weight: bold;
+  text-shadow: 2px 2px #ff4800;
 }
 
 header ul {
@@ -333,19 +334,19 @@ main {
 }
 
 .sortButton {
-  border: 1px solid #f8f4ed;
+  border: 2px solid #faf6f0;
   border-radius: 10px;
-  color: #f8f4ed;
-  background-color: #ec4e20;
+  color: #131615;
+  font-weight: bold;
+  background-color: #ffbea7;
   padding: 5px 10px;
   margin: 5px 0;
   display: block;
 }
 
 .sortButton:hover, .sortButton:focus {
-  background-color: #ff8551;
-  -webkit-box-shadow: 2px 2px 5px #f8f4ed;
-          box-shadow: 2px 2px 5px #f8f4ed;
+  -webkit-box-shadow: 5px 5px #ff4800;
+          box-shadow: 5px 5px #ff4800;
 }
 
 @media (min-width: 750px) {
@@ -366,14 +367,13 @@ button.newAddy {
 }
 
 button.newAddy i {
-  color: #ec4e20;
+  color: #ff4800;
   font-size: 2rem;
-  text-shadow: 2px 2px 5px #f8f4ed;
 }
 
 button.newAddy:hover::before, button.newAddy:focus::before {
   content: 'New contact';
-  color: #f8f4ed;
+  color: #faf6f0;
   font-size: 1.2rem;
   position: relative;
   top: -7px;
@@ -381,54 +381,45 @@ button.newAddy:hover::before, button.newAddy:focus::before {
 }
 
 form {
-  background-color: #fec0aa;
+  background-color: #ffbea7;
   border-radius: 10px;
   padding: 2%;
 }
 
 form label {
-  color: #ec4e20;
-  position: relative;
-  top: 10px;
-  left: 10px;
+  color: #550000;
+  margin-top: 15px;
 }
 
 form input {
   width: 100%;
-  border: none;
-  border-bottom: 1px solid #ec4e20;
-  border-left: 1px solid #ec4e20;
-  border-right: 1px solid #ec4e20;
+  border: 1px solid #550000;
   border-radius: 10px;
   margin-bottom: 10px 0;
   padding: 10px;
-  background-color: #f8f4ed;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(30%, #f8f4ed), to(#fec0aa));
-  background-image: linear-gradient(to top, #f8f4ed 30%, #fec0aa);
-  color: #2e3532;
+  background-color: #faf6f0;
+  color: #131615;
 }
 
 form input:focus {
   background-image: none;
-  -webkit-box-shadow: 2px 2px 5px #ec4e20;
-          box-shadow: 2px 2px 5px #ec4e20;
+  -webkit-box-shadow: 5px 5px #ff4800;
+          box-shadow: 5px 5px #ff4800;
 }
 
 form button {
   display: block;
   margin: 10px auto;
   padding: 10px 20px;
-  border: 1px solid #ec4e20;
+  border: 1px solid #131615;
   border-radius: 10px;
-  background-color: #ec4e20;
-  color: #f8f4ed;
+  background-color: #ff4800;
+  color: #faf6f0;
 }
 
 form button:hover, form button:focus {
-  background-color: #fec0aa;
-  color: #ec4e20;
-  -webkit-box-shadow: 2px 2px 5px #ec4e20;
-          box-shadow: 2px 2px 5px #ec4e20;
+  -webkit-box-shadow: 5px 5px #550000;
+          box-shadow: 5px 5px #550000;
 }
 
 form.newContact {
@@ -436,7 +427,7 @@ form.newContact {
   right: 50px;
   top: -10px;
   width: calc(100% - 100px);
-  border: 2px solid #2e3532;
+  border: 2px solid #131615;
   overflow: hidden;
   -webkit-animation: slideOut 1s;
           animation: slideOut 1s;
@@ -473,7 +464,7 @@ form.newContact {
 
 form.editForm {
   margin: 10px 0;
-  border: 1px solid #2e3532;
+  border: 1px solid #131615;
 }
 
 .addressContainer {
@@ -487,9 +478,9 @@ form.editForm {
   padding: 3%;
   width: 100%;
   border-radius: 10px;
-  border: 1px solid #2e3532;
-  background-color: #fec0aa;
-  color: #2e3532;
+  border: 2px solid #ff4800;
+  background-color: #ffbea7;
+  color: #131615;
   position: relative;
 }
 
@@ -500,14 +491,14 @@ form.editForm {
 }
 
 .addressContainer .profilePic img {
-  background-color: #f8f4ed;
+  background-color: #faf6f0;
   border-radius: 50%;
   padding: 2%;
-  border: 1px solid #2e3532;
+  border: 1px solid #131615;
 }
 
 .addressContainer h2 {
-  color: #ec4e20;
+  color: #550000;
 }
 
 .addressContainer .contactInfo {
@@ -527,7 +518,7 @@ form.editForm {
 }
 
 .addressContainer i {
-  color: #ec4e20;
+  color: #550000;
   margin-right: 2%;
 }
 
@@ -575,9 +566,6 @@ form.editForm {
     -ms-grid-column-span: 1;
     grid-column: 2 / 3;
     margin-left: 2%;
-  }
-  .addressContainer .deleteThis i {
-    font-size: 1.7rem;
   }
 }
 
