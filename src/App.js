@@ -69,7 +69,13 @@ class App extends Component {
     userInput.lastContacted = lastContacted;
     dbRef.push(userInput);
     this.setState({
-      displayForm: false
+      displayForm: false,
+      firstName: "",
+      lastName: "",
+      contactMain: "",
+      company: "",
+      contactedVia: "",
+      lastContacted: "",
     })
   }
 
@@ -84,8 +90,8 @@ class App extends Component {
 
   clickSort = (e) => {
     const toSortBy = e.target.id;
-    const fuckingFakeArray = [...this.state.contacts];
-    const arrayToSort = fuckingFakeArray.map((contact) => {
+    const copyOfContacts = [...this.state.contacts];
+    const arrayToSort = copyOfContacts.map((contact) => {
       return contact.contactObj[toSortBy];
     })
     const testAThing = arrayToSort.sort();
@@ -93,20 +99,20 @@ class App extends Component {
 
     testAThing.forEach((sortedThing) => {
       let shouldIAddIt = true
-      // test it against each item in fuckingFakeArray
-      fuckingFakeArray.forEach((fuckingFakeContact) => {
-        if(fuckingFakeContact.contactObj[toSortBy] === sortedThing) {
+      // test it against each item in copyOfContacts
+      copyOfContacts.forEach((contactCopy) => {
+        if(contactCopy.contactObj[toSortBy] === sortedThing) {
           if (sortedArrayQuestionMark.length === 0) {
             shouldIAddIt = true;
           } else {
             sortedArrayQuestionMark.forEach((sortedContact) => {
-              if (sortedContact.contactId === fuckingFakeContact.contactId) {
+              if (sortedContact.contactId === contactCopy.contactId) {
                 shouldIAddIt = false;
               }
             })
           }
           if (shouldIAddIt) {
-            sortedArrayQuestionMark.push(fuckingFakeContact);
+            sortedArrayQuestionMark.push(contactCopy);
           }
           this.setState({
             contacts: sortedArrayQuestionMark
@@ -117,21 +123,42 @@ class App extends Component {
   }
 
   clickTheEditButton = (whatClicked) => {
-    console.log(whatClicked);
     const newContacts = [...this.state.contacts]
     const whoDis = newContacts.filter((contact) => {
       return contact.contactId === whatClicked;
     })
-    console.log(whoDis)
     this.setState({
-      editContactForm: whatClicked,
-      firstName: whoDis[0].contactObj.firstName,
+      editContactForm: whatClicked, //I didn't want to destructure this since all of the 
+      firstName: whoDis[0].contactObj.firstName, //variable names are the same.
       lastName: whoDis[0].contactObj.lastName,
       company: whoDis[0].contactObj.company,
       contactMain: whoDis[0].contactObj.contactMain,
       contactedVia: whoDis[0].contactObj.contactedVia,
       lastContacted: whoDis[0].contactObj.lastContacted
     })
+  }
+
+  submitTheEditForm = (whatEdited) => {
+    const dbRefToEdit = firebase.database().ref(whatEdited);
+    const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = this.state
+    const userInput = {};
+    userInput.firstName = firstName;
+    userInput.lastName = lastName; //this needs to be capitalized
+    userInput.contactMain = contactMain;
+    userInput.company = company;
+    userInput.contactedVia = contactedVia;
+    userInput.lastContacted = lastContacted;
+    dbRefToEdit.set(userInput);
+    this.setState({
+      editContactForm: "",
+      firstName: "",
+      lastName: "",
+      contactMain: "",
+      company: "",
+      contactedVia: "",
+      lastContacted: "",
+    })
+
   }
   
   render() {
@@ -167,8 +194,9 @@ class App extends Component {
                       company={this.state.company}
                       contactedVia={this.state.contactedVia}
                       lastContacted={this.state.lastContacted}
-                      editSubmit={this.formSubmit}
+                      editSubmit={this.submitTheEditForm}
                       editChange={this.inputChange}
+                      editId={contactVal.contactId}
                     />
                   </li>
                 )

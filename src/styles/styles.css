@@ -380,29 +380,20 @@ button.newAddy:hover::before, button.newAddy:focus::before {
   right: 10px;
 }
 
-form.newContact {
-  position: absolute;
-  right: 50px;
-  top: -10px;
-  width: calc(100% - 100px);
-  max-height: auto;
-  border: 2px solid #2e3532;
-  border-radius: 10px;
+form {
   background-color: #fec0aa;
+  border-radius: 10px;
   padding: 2%;
-  overflow: hidden;
-  -webkit-animation: slideOut 1s;
-          animation: slideOut 1s;
 }
 
-form.newContact label {
+form label {
   color: #ec4e20;
   position: relative;
   top: 10px;
   left: 10px;
 }
 
-form.newContact input {
+form input {
   width: 100%;
   border: none;
   border-bottom: 1px solid #ec4e20;
@@ -417,13 +408,13 @@ form.newContact input {
   color: #2e3532;
 }
 
-form.newContact input:focus {
+form input:focus {
   background-image: none;
   -webkit-box-shadow: 2px 2px 5px #ec4e20;
           box-shadow: 2px 2px 5px #ec4e20;
 }
 
-form.newContact button {
+form button {
   display: block;
   margin: 10px auto;
   padding: 10px 20px;
@@ -433,17 +424,28 @@ form.newContact button {
   color: #f8f4ed;
 }
 
-form.newContact button:hover, form.newContact button:focus {
+form button:hover, form button:focus {
   background-color: #fec0aa;
   color: #ec4e20;
   -webkit-box-shadow: 2px 2px 5px #ec4e20;
           box-shadow: 2px 2px 5px #ec4e20;
 }
 
+form.newContact {
+  position: absolute;
+  right: 50px;
+  top: -10px;
+  width: calc(100% - 100px);
+  border: 2px solid #2e3532;
+  overflow: hidden;
+  -webkit-animation: slideOut 1s;
+          animation: slideOut 1s;
+  z-index: 10;
+}
+
 @media (min-width: 1000px) {
   form.newContact {
     width: 50%;
-    max-height: auto;
   }
 }
 
@@ -469,6 +471,11 @@ form.newContact button:hover, form.newContact button:focus {
   }
 }
 
+form.editForm {
+  margin: 10px 0;
+  border: 1px solid #2e3532;
+}
+
 .addressContainer {
   display: -ms-grid;
   display: grid;
@@ -483,6 +490,7 @@ form.newContact button:hover, form.newContact button:focus {
   border: 1px solid #2e3532;
   background-color: #fec0aa;
   color: #2e3532;
+  position: relative;
 }
 
 .addressContainer .profilePic {
@@ -499,7 +507,6 @@ form.newContact button:hover, form.newContact button:focus {
 }
 
 .addressContainer h2 {
-  text-align: right;
   color: #ec4e20;
 }
 
@@ -527,8 +534,19 @@ form.newContact button:hover, form.newContact button:focus {
 .addressContainer button {
   background: none;
   border: none;
-  text-align: right;
   font-weight: bold;
+}
+
+.addressContainer .deleteThis {
+  text-align: left;
+  -ms-grid-column: 1;
+  grid-column: 1;
+}
+
+.addressContainer .update {
+  -ms-grid-column: 2;
+  grid-column: 2;
+  text-align: right;
 }
 
 @media (min-width: 500px) {
@@ -549,13 +567,17 @@ form.newContact button:hover, form.newContact button:focus {
 
 @media (min-width: 750px) {
   .addressContainer .profilePic {
-    grid-row: span 6;
+    grid-row: span 5;
   }
   .addressContainer .contactInfo,
   .addressContainer .contactInfo ~ p {
     -ms-grid-column: 2;
     -ms-grid-column-span: 1;
     grid-column: 2 / 3;
+    margin-left: 2%;
+  }
+  .addressContainer .deleteThis i {
+    font-size: 1.7rem;
   }
 }
 
@@ -566,8 +588,8 @@ form.newContact button:hover, form.newContact button:focus {
   }
   .addressContainer .profilePic {
     -ms-grid-row: 1;
-    -ms-grid-row-span: 6;
-    grid-row: 1 / span 6;
+    -ms-grid-row-span: 5;
+    grid-row: 1 / span 5;
   }
   .addressContainer p {
     margin-left: 2%;
