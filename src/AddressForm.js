@@ -1,20 +1,24 @@
 import React from 'react';
 
 const AddressForm = (props) => {
-  const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = props;
+  const {firstName, lastName, contactMain, company, contactedVia, lastContacted, editSubmit, editChange} = props;
 
   return (
-    <div className="addressContainer">
-      <div className="profilePic">
-        <img src="http://placekitten.com/200/200" alt="professional headshot"/>
-      </div>
-      <h2>{firstName + " " + lastName}</h2>
-      <p className="contactInfo">{contactMain}</p>
-      <label htmlFor="company" className="visuallyHidden">Company</label>
-      <input id="company" type="text" value={company}/>
-      <p><span className="info">Connected Via: </span>{contactedVia}</p>
-      <p><span className="info">Last Contacted: </span>{lastContacted}</p>
-    </div>
+    <form className="editForm" onSubmit={editSubmit}>
+      <label htmlFor="firstName">First Name:</label>
+      <input id="firstName" onChange={editChange} type="text" value={firstName}/>
+      <label htmlFor="lastName">Last Name:</label>
+      <input type="text" value={lastName}/>
+      <label htmlFor="contactMain">Main Contact:</label>
+      <input type="text" value={contactMain}/>
+      <label htmlFor="">Company:</label>
+      <input type="text" value={company}/>
+      <label htmlFor="contactedVia">Contacted Via:</label>
+      <input type="text" value={contactedVia}/>
+      <label htmlFor="lastContacted">Last Contacted:</label>
+      <input type="date" value={lastContacted}/>
+      <button type="submit">Update</button>
+    </form>
   )
 };
 

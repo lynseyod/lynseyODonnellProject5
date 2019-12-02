@@ -3,7 +3,8 @@ import firebase from './firebase.js';
 
 import Header from './Header';
 import AddressCard from './AddressCard';
-import Form from './Form'
+import AddressForm from './AddressForm';
+import Form from './Form';
 import './styles/styles.css';
 import 'animate.css'
 
@@ -18,7 +19,8 @@ class App extends Component {
       company: "",
       contactedVia: "",
       lastContacted: "",
-      displayForm: false,
+      displayForm: false, //toggled to display main form
+      editContactForm: "", //will be filled with contactId
     }
   }
 
@@ -115,15 +117,25 @@ class App extends Component {
   }
 
   clickTheEditButton = (whatClicked) => {
-    this.state.contacts.forEach((contact) => {
-      if (contact.contactId === whatClicked) {
-        console.log(contact);
-      }
+    console.log(whatClicked);
+    const newContacts = [...this.state.contacts]
+    const whoDis = newContacts.filter((contact) => {
+      return contact.contactId === whatClicked;
+    })
+    console.log(whoDis)
+    this.setState({
+      editContactForm: whatClicked,
+      firstName: whoDis[0].contactObj.firstName,
+      lastName: whoDis[0].contactObj.lastName,
+      company: whoDis[0].contactObj.company,
+      contactMain: whoDis[0].contactObj.contactMain,
+      contactedVia: whoDis[0].contactObj.contactedVia,
+      lastContacted: whoDis[0].contactObj.lastContacted
     })
   }
   
   render() {
-    
+  
     return (
       <div className="wrapper">
         <Header />
@@ -135,10 +147,32 @@ class App extends Component {
           <button className="newAddy" onClick={this.handleClickMainForm}>
             {this.state.displayForm ? <i className="fas fa-times-circle"></i> : <i className="fas fa-plus-circle"></i>}
           </button>
-          {this.state.displayForm ? <Form addContact={this.formSubmit} inputChange={this.inputChange}/> : null}
+          {this.state.displayForm ? 
+            <Form 
+              addContact={this.formSubmit}
+              inputChange={this.inputChange}
+            />
+            : null}
           <ul>
             {this.state.contacts.map( (contactVal, index) => {
               const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = contactVal.contactObj;
+
+              if (contactVal.contactId === this.state.editContactForm) {
+                return (
+                  <li key={contactVal.contactId}>
+                    <AddressForm 
+                      firstName={this.state.firstName}
+                      lastName={this.state.lastName}
+                      contactMain={this.state.contactMain}
+                      company={this.state.company}
+                      contactedVia={this.state.contactedVia}
+                      lastContacted={this.state.lastContacted}
+                      editSubmit={this.formSubmit}
+                      editChange={this.inputChange}
+                    />
+                  </li>
+                )
+              }
 
               return (
                 <li key={contactVal.contactId}>
