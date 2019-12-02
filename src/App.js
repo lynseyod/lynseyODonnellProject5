@@ -5,6 +5,7 @@ import Header from './Header';
 import AddressCard from './AddressCard';
 import Form from './Form'
 import './styles/styles.css';
+import 'animate.css'
 
 class App extends Component {
   constructor(){
