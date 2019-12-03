@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      comingSoon: false,
+    }
+  }
+
+  handleClick = () => {
+    this.setState({
+      comingSoon: true
+    });
+  }
+
   render() {
     return(
       <header>
         <nav>
-          <p className="logo">addy</p>
+          <p className="logo">rolling index</p>
           <ul>
-            <li><a href="#">Sign in</a></li>
+            <li><a>Sign in</a></li>
             <li><p>/</p></li>
-            <li><a href="#">Sign up</a></li>
+            <li><a>Sign up</a></li>
           </ul>
         </nav>
-        <h1>Lynsey's addy</h1>
+        <h1>rolling index</h1>
       </header>
     )
   }

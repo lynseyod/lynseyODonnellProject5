@@ -22,12 +22,22 @@ header {
     display: flex;
     justify-content: space-between;
   }
-  h1 {
-    margin: 0 auto;
-  }
   @include mqTablet {
     nav ul {
       width: 25%;
+    }
+  }
+  a:hover,
+  a:focus {
+    color: $main;
+    position: relative;
+    &::before {
+      content: 'Coming Soon!';
+      color: $white;
+      position: absolute;
+      display: block;
+      top: 25px;
+      width: auto;
     }
   }
 }

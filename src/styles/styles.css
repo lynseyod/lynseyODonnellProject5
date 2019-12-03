@@ -232,7 +232,8 @@ h2 {
 }
 
 h1 {
-  font-size: 1.7rem;
+  font-size: 2rem;
+  margin: 0 auto;
 }
 
 h2 {
@@ -282,14 +283,26 @@ header ul {
           justify-content: space-between;
 }
 
-header h1 {
-  margin: 0 auto;
-}
-
 @media (min-width: 750px) {
   header nav ul {
     width: 25%;
   }
+}
+
+header a:hover,
+header a:focus {
+  color: #ff4800;
+  position: relative;
+}
+
+header a:hover::before,
+header a:focus::before {
+  content: 'Coming Soon!';
+  color: #faf6f0;
+  position: absolute;
+  display: block;
+  top: 25px;
+  width: auto;
 }
 
 main {

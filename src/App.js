@@ -46,6 +46,18 @@ class App extends Component {
     })
   }
 
+  // track all changes on form inputs
+  inputChange = (e) => {
+    const target = e.target;
+    const value = target.value;
+    const name = target.id;
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  //function to push user inputs into an object
+  //completed on both form submits so now it's a function!
   pushUserInputs = (newObject) => {
     const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = this.state;
     newObject.firstName = firstName;
@@ -57,6 +69,8 @@ class App extends Component {
     newObject.imageSrc = imageSrc;
   }
 
+  // also completed on both form submits
+  // resetting the state so it doesn't hold onto input values after submit
   resetState = () => {
     this.setState({
       firstName: "",
@@ -65,10 +79,13 @@ class App extends Component {
       company: "",
       contactedVia: "",
       lastContacted: "",
+      //set a default image in case the user doesn't have a url
       imageSrc: "http://placekitten.com/200/200"
     })
   }
 
+  // listens for a click on the 'new contact' button
+  // assigns boolean used to conditionally display the form.
   handleClickMainForm = () => {
     if (this.state.displayForm) {
       this.setState({
@@ -81,45 +98,39 @@ class App extends Component {
     }
   }
 
-  formSubmit = (e) => {
+  // event listener for new contact form submission!
+  newContactSubmit = (e) => {
     e.preventDefault();
     const dbRef = firebase.database().ref();
     const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = this.state;
+    //all fields except image must be filled out or an error shows
     if (firstName !== "" && lastName !== "" && contactMain !== "" && company !== "" && contactedVia !== "" && lastContacted !== "") {
       const userInput = {};
       this.pushUserInputs(userInput);
       dbRef.push(userInput);
       this.resetState();
       this.setState({
-        displayForm: false,
+        displayForm: false, //and the form goes away once it's been submitted.
       })
-    } else {
+    } else { //if not all fields are filled, error message displays.
       this.setState({
         formError: true
       })
     }
   }
 
-  inputChange = (e) => {
-    const target = e.target;
-    const value = target.value;
-    const name = target.id;
-    this.setState({
-      [name]: value,
-    })
-  }
-
+  // event listener for sorting functionality
   clickSort = (e) => {
-    const toSortBy = e.target.id;
-    const copyOfContacts = [...this.state.contacts];
+    const toSortBy = e.target.id; //WHAT are we sorting by?
+    const copyOfContacts = [...this.state.contacts]; //copy our contacts so we can mutate
     const arrayToSort = copyOfContacts.map((contact) => {
       return contact.contactObj[toSortBy]; // sorting just the properties we're after
     })
     const arrayToCompare = arrayToSort.sort(); // now we have an order to test against
-    const sortedArray = [];
+    const sortedArray = []; //nice empty array to push contactObj into
 
     arrayToCompare.forEach((sortedThing) => {
-      let shouldIAddIt = true
+      let shouldIAddIt = true //assume we should add it at first
       // test it against each item in copyOfContacts
       copyOfContacts.forEach((contactCopy) => {
         if(contactCopy.contactObj[toSortBy] === sortedThing) {
@@ -143,11 +154,15 @@ class App extends Component {
     })
   }
 
+  //event listener for editing contacts
   clickTheEditButton = (whatClicked) => {
-    const newContacts = [...this.state.contacts]
+    const newContacts = [...this.state.contacts] //copy the array in state
     const whoDis = newContacts.filter((contact) => {
-      return contact.contactId === whatClicked;
+      return contact.contactId === whatClicked; //matches clicked contact in state
     })
+    //set state values to match selected contact
+    //allows us to set default values in the 'edit' form
+    //if I simply set the values to this.state.contacts.contactObj.etc, the values aren't editable! Changing them changes state (because of event listener) and triggers rerender, resetting the form back to the original values. UGH!
     this.setState({
       editContactForm: whatClicked, //I didn't want to destructure this since all of the 
       firstName: whoDis[0].contactObj.firstName, //variable names are the same.
@@ -160,6 +175,8 @@ class App extends Component {
     })
   }
 
+  // slightly different error handling than the new contact submit
+  // so it gets its own event handler.
   submitTheEditForm = (whatEdited) => {
     const dbRefToEdit = firebase.database().ref(whatEdited);
     const userInput = {};
@@ -171,6 +188,7 @@ class App extends Component {
     this.resetState();
   }
   
+  // and now we ACTUALLY start rendering!
   render() {
   
     return (
@@ -182,19 +200,22 @@ class App extends Component {
           <button className="sortButton" id="lastName" onClick={this.clickSort}>Last Name</button>
           <button className="sortButton" id="company" onClick={this.clickSort}>Company</button>
           <button className="newAddy" onClick={this.handleClickMainForm}>
+            {/* check if the form is displayed to set icon as + or x */}
             {this.state.displayForm ? <i className="fas fa-times-circle"></i> : <i className="fas fa-plus-circle"></i>}
           </button>
+          {/* check if new contact form needs to be displayed */}
           {this.state.displayForm ? 
             <Form 
-              addContact={this.formSubmit}
+              addContact={this.newContactSubmit}
               inputChange={this.inputChange}
               errorMessage={this.state.formError}
             />
             : null}
           <ul>
+            {/* start mapping our contacts array from state */}
             {this.state.contacts.map( (contactVal, index) => {
               const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = contactVal.contactObj;
-
+              // first check if it's been selected to be edited
               if (contactVal.contactId === this.state.editContactForm) {
                 return (
                   <li key={contactVal.contactId}>
@@ -213,7 +234,7 @@ class App extends Component {
                   </li>
                 )
               }
-
+              //otherwise just the normal address card!
               return (
                 <li key={contactVal.contactId}>
                   <AddressCard
