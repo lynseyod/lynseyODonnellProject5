@@ -453,9 +453,8 @@ form p {
 
 form.newContact {
   position: absolute;
-  right: 50px;
   top: -10px;
-  width: calc(100% - 100px);
+  width: 100%;
   border: 2px solid #131615;
   overflow: hidden;
   -webkit-animation: slideOut 1s;
@@ -465,6 +464,13 @@ form.newContact {
 form.newContact label {
   display: inline-block;
   margin-top: 15px;
+}
+
+@media (min-width: 1000px) {
+  form.newContact {
+    width: calc(100% - 100px);
+    right: 50px;
+  }
 }
 
 @-webkit-keyframes slideOut {
@@ -495,20 +501,19 @@ form.editForm {
   position: relative;
 }
 
-form.editForm label {
-  display: block;
-  width: 50%;
-  text-align: right;
-  padding-right: 20px;
-  position: relative;
-  top: 25px;
-  left: 50%;
-  margin: -10px 0;
-}
-
 @media (min-width: 1000px) {
   form.editForm {
     position: absolute;
+  }
+  form.editForm label {
+    display: block;
+    width: 50%;
+    text-align: right;
+    padding-right: 20px;
+    position: relative;
+    top: 25px;
+    left: 50%;
+    margin: -10px 0;
   }
 }
 
