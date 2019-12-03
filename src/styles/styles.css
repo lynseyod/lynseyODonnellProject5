@@ -574,10 +574,18 @@ form.editForm label {
   grid-column: 1;
 }
 
+.addressContainer .deleteThis:hover, .addressContainer .deleteThis:focus {
+  color: #ff4800;
+}
+
 .addressContainer .update {
   -ms-grid-column: 2;
   grid-column: 2;
   text-align: right;
+}
+
+.addressContainer .update:hover, .addressContainer .update:focus {
+  color: #ff4800;
 }
 
 @media (min-width: 500px) {

@@ -39,10 +39,18 @@
   .deleteThis {
     text-align: left;
     grid-column: 1;
+    &:hover,
+    &:focus {
+      color: $main;
+    }
   }
   .update {
     grid-column: 2;
     text-align: right;
+    &:hover,
+    &:focus {
+      color: $main;
+    }
   }
   @include mq500 {
     h2 {
