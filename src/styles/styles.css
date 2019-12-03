@@ -395,7 +395,6 @@ form {
 
 form label {
   color: #550000;
-  margin-top: 15px;
 }
 
 form input {
@@ -450,6 +449,11 @@ form.newContact {
           animation: slideOut 1s;
 }
 
+form.newContact label {
+  display: inline-block;
+  margin-top: 15px;
+}
+
 @-webkit-keyframes slideOut {
   from {
     height: 0;
@@ -475,7 +479,24 @@ form.newContact {
 form.editForm {
   margin: 10px 0;
   border: 2px solid #ff4800;
-  position: absolute;
+  position: relative;
+}
+
+form.editForm label {
+  display: block;
+  width: 50%;
+  text-align: right;
+  padding-right: 20px;
+  position: relative;
+  top: 25px;
+  left: 50%;
+  margin: -10px 0;
+}
+
+@media (min-width: 1000px) {
+  form.editForm {
+    position: absolute;
+  }
 }
 
 .addressContainer {
@@ -488,6 +509,7 @@ form.editForm {
   margin: 2% 0;
   padding: 3%;
   width: 100%;
+  height: auto;
   border-radius: 10px;
   border: 2px solid #ff4800;
   background-color: #ffbea7;
@@ -587,10 +609,6 @@ form.editForm {
   .addressContainer p {
     margin-left: 2%;
   }
-}
-
-.addressContainer:first-of-type {
-  margin-top: 0;
 }
 
 footer {

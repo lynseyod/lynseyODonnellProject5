@@ -5,7 +5,6 @@ form {
   z-index: 10;
   label {
     color: $mainDark;
-    margin-top: 15px;
   }
   input {
     width: 100%;
@@ -49,6 +48,10 @@ form.newContact {
   border: 2px solid $black;
   overflow: hidden;
   animation: slideOut 1s;
+  label {
+    display: inline-block;
+    margin-top: 15px;
+  }
 }
 
 @keyframes slideOut {
@@ -65,5 +68,18 @@ form.newContact {
 form.editForm {
   margin: 10px 0;
   border: 2px solid $main;
-  position: absolute;
+  position: relative;
+  label {
+    display: block;
+    width: 50%;
+    text-align: right;
+    padding-right: 20px;
+    position: relative;
+    top: 25px;
+    left: 50%;
+    margin: -10px 0;
+  }
+  @include mqTabLayout {
+    position: absolute;
+  }
 }

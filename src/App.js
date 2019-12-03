@@ -46,6 +46,17 @@ class App extends Component {
     })
   }
 
+  pushUserInputs = (newObject) => {
+    const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = this.state;
+    newObject.firstName = firstName;
+    newObject.lastName = lastName;
+    newObject.contactMain = contactMain;
+    newObject.company = company;
+    newObject.contactedVia = contactedVia;
+    newObject.lastContacted = lastContacted;
+    newObject.imageSrc = imageSrc;
+  }
+
   resetState = () => {
     this.setState({
       firstName: "",
@@ -58,7 +69,7 @@ class App extends Component {
     })
   }
 
-  handleClickMainForm = (event) => {
+  handleClickMainForm = () => {
     if (this.state.displayForm) {
       this.setState({
         displayForm: false
@@ -70,20 +81,13 @@ class App extends Component {
     }
   }
 
-  formSubmit = (event) => {
-    event.preventDefault();
-    
+  formSubmit = (e) => {
+    e.preventDefault();
     const dbRef = firebase.database().ref();
-    const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = this.state;
+    const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = this.state;
     if (firstName !== "" && lastName !== "" && contactMain !== "" && company !== "" && contactedVia !== "" && lastContacted !== "") {
       const userInput = {};
-      userInput.firstName = firstName;
-      userInput.lastName = lastName;
-      userInput.contactMain = contactMain;
-      userInput.company = company;
-      userInput.contactedVia = contactedVia;
-      userInput.lastContacted = lastContacted;
-      userInput.imageSrc = imageSrc;
+      this.pushUserInputs(userInput);
       dbRef.push(userInput);
       this.resetState();
       this.setState({
@@ -96,14 +100,8 @@ class App extends Component {
     }
   }
 
-  dismissError = () => {
-    this.setState({
-      formError: false
-    })
-  }
-
-  inputChange = (event) => {
-    const target = event.target;
+  inputChange = (e) => {
+    const target = e.target;
     const value = target.value;
     const name = target.id;
     this.setState({
@@ -130,7 +128,7 @@ class App extends Component {
           } else {
             sortedArray.forEach((sortedContact) => {
               if (sortedContact.contactId === contactCopy.contactId) {
-                shouldIAddIt = false;
+                shouldIAddIt = false; // so we're not duplicating when values match
               }
             })
           }
@@ -164,15 +162,8 @@ class App extends Component {
 
   submitTheEditForm = (whatEdited) => {
     const dbRefToEdit = firebase.database().ref(whatEdited);
-    const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = this.state
     const userInput = {};
-    userInput.firstName = firstName;
-    userInput.lastName = lastName;
-    userInput.contactMain = contactMain;
-    userInput.company = company;
-    userInput.contactedVia = contactedVia;
-    userInput.lastContacted = lastContacted;
-    userInput.imageSrc = imageSrc;
+    this.pushUserInputs(userInput);
     dbRefToEdit.set(userInput);
     this.setState({
       editContactForm: "",

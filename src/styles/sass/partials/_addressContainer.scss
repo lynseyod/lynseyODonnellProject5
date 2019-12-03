@@ -5,6 +5,7 @@
   margin: 2% 0;
   padding: 3%;
   width: 100%;
+  height: auto;
   border-radius: 10px;
   border: 2px solid $main;
   background-color: $mainLight;
@@ -73,8 +74,4 @@
       margin-left: 2%;
     }
   }
-}
-
-.addressContainer:first-of-type {
-  margin-top: 0;
 }
