@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Form = (props) => {
-  const {addContact, inputChange, errorMessage, okIGetIt} = props;
+  const {addContact, inputChange, errorMessage} = props;
   
   return (
     <form className="newContact" onSubmit={addContact}>
@@ -17,6 +17,8 @@ const Form = (props) => {
       <input id="contactedVia" type="text" onChange={inputChange}/>
       <label htmlFor="lastContacted">Last Contacted:</label>
       <input id="lastContacted" type="date" onChange={inputChange}/>
+      <label htmlFor="imgUrl">(Optional)Image Url:</label>
+      <input id="imgUrl" type="text" onChange={inputChange}/>
       <button type="submit">Submit</button>
       {errorMessage ? 
         <div className="ErrorMessage">

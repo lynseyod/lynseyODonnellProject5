@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AddressForm = (props) => {
-  const {firstName, lastName, contactMain, company, contactedVia, lastContacted, editSubmit, editChange, editId} = props;
+  const {firstName, lastName, contactMain, company, contactedVia, lastContacted, editSubmit, editChange, editId, imageSrc} = props;
 
   const bufferThatSubmit = () => {
     editSubmit(editId);
@@ -21,6 +21,8 @@ const AddressForm = (props) => {
       <input id="contactedVia" onChange={editChange} type="text" value={contactedVia}/>
       <label htmlFor="lastContacted">Last Contacted:</label>
       <input id="lastContacted" onChange={editChange} type="date" value={lastContacted}/>
+      <label htmlFor="imageSrc">Image Url:</label>
+      <input id="imageSrc" onChange={editChange} type="text" value={imageSrc}/>
       <button type="submit">Update</button>
     </form>
   )

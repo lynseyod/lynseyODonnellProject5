@@ -19,6 +19,7 @@ class App extends Component {
       company: "",
       contactedVia: "",
       lastContacted: "",
+      imageSrc: "http://placekitten.com/200/200",
       displayForm: false, //toggled to display main form
       formError: false, //toggled to display error message!
       editContactForm: "", //will be filled with contactId
@@ -45,6 +46,18 @@ class App extends Component {
     })
   }
 
+  resetState = () => {
+    this.setState({
+      firstName: "",
+      lastName: "",
+      contactMain: "",
+      company: "",
+      contactedVia: "",
+      lastContacted: "",
+      imageSrc: "http://placekitten.com/200/200"
+    })
+  }
+
   handleClickMainForm = (event) => {
     if (this.state.displayForm) {
       this.setState({
@@ -61,24 +74,20 @@ class App extends Component {
     event.preventDefault();
     
     const dbRef = firebase.database().ref();
-    const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = this.state
-    const userInput = {};
+    const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = this.state;
     if (firstName !== "" && lastName !== "" && contactMain !== "" && company !== "" && contactedVia !== "" && lastContacted !== "") {
+      const userInput = {};
       userInput.firstName = firstName;
-      userInput.lastName = lastName; //this needs to be capitalized
+      userInput.lastName = lastName;
       userInput.contactMain = contactMain;
       userInput.company = company;
       userInput.contactedVia = contactedVia;
       userInput.lastContacted = lastContacted;
+      userInput.imageSrc = imageSrc;
       dbRef.push(userInput);
+      this.resetState();
       this.setState({
         displayForm: false,
-        firstName: "",
-        lastName: "",
-        contactMain: "",
-        company: "",
-        contactedVia: "",
-        lastContacted: "",
       })
     } else {
       this.setState({
@@ -106,30 +115,30 @@ class App extends Component {
     const toSortBy = e.target.id;
     const copyOfContacts = [...this.state.contacts];
     const arrayToSort = copyOfContacts.map((contact) => {
-      return contact.contactObj[toSortBy];
+      return contact.contactObj[toSortBy]; // sorting just the properties we're after
     })
-    const testAThing = arrayToSort.sort();
-    const sortedArrayQuestionMark = [];
+    const arrayToCompare = arrayToSort.sort(); // now we have an order to test against
+    const sortedArray = [];
 
-    testAThing.forEach((sortedThing) => {
+    arrayToCompare.forEach((sortedThing) => {
       let shouldIAddIt = true
       // test it against each item in copyOfContacts
       copyOfContacts.forEach((contactCopy) => {
         if(contactCopy.contactObj[toSortBy] === sortedThing) {
-          if (sortedArrayQuestionMark.length === 0) {
+          if (sortedArray.length === 0) {
             shouldIAddIt = true;
           } else {
-            sortedArrayQuestionMark.forEach((sortedContact) => {
+            sortedArray.forEach((sortedContact) => {
               if (sortedContact.contactId === contactCopy.contactId) {
                 shouldIAddIt = false;
               }
             })
           }
           if (shouldIAddIt) {
-            sortedArrayQuestionMark.push(contactCopy);
+            sortedArray.push(contactCopy);
           }
           this.setState({
-            contacts: sortedArrayQuestionMark
+            contacts: sortedArray
           })
         }
       })
@@ -148,31 +157,27 @@ class App extends Component {
       company: whoDis[0].contactObj.company,
       contactMain: whoDis[0].contactObj.contactMain,
       contactedVia: whoDis[0].contactObj.contactedVia,
-      lastContacted: whoDis[0].contactObj.lastContacted
+      lastContacted: whoDis[0].contactObj.lastContacted,
+      imageSrc: whoDis[0].contactObj.imageSrc
     })
   }
 
   submitTheEditForm = (whatEdited) => {
     const dbRefToEdit = firebase.database().ref(whatEdited);
-    const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = this.state
+    const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = this.state
     const userInput = {};
     userInput.firstName = firstName;
-    userInput.lastName = lastName; //this needs to be capitalized
+    userInput.lastName = lastName;
     userInput.contactMain = contactMain;
     userInput.company = company;
     userInput.contactedVia = contactedVia;
     userInput.lastContacted = lastContacted;
+    userInput.imageSrc = imageSrc;
     dbRefToEdit.set(userInput);
     this.setState({
       editContactForm: "",
-      firstName: "",
-      lastName: "",
-      contactMain: "",
-      company: "",
-      contactedVia: "",
-      lastContacted: "",
     })
-
+    this.resetState();
   }
   
   render() {
@@ -193,12 +198,11 @@ class App extends Component {
               addContact={this.formSubmit}
               inputChange={this.inputChange}
               errorMessage={this.state.formError}
-              dismissMe={this.dismissError}
             />
             : null}
           <ul>
             {this.state.contacts.map( (contactVal, index) => {
-              const {firstName, lastName, contactMain, company, contactedVia, lastContacted} = contactVal.contactObj;
+              const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc} = contactVal.contactObj;
 
               if (contactVal.contactId === this.state.editContactForm) {
                 return (
@@ -213,6 +217,7 @@ class App extends Component {
                       editSubmit={this.submitTheEditForm}
                       editChange={this.inputChange}
                       editId={contactVal.contactId}
+                      imageSrc={this.state.imageSrc}
                     />
                   </li>
                 )
@@ -227,6 +232,7 @@ class App extends Component {
                     company={company}
                     contactedVia={contactedVia}
                     lastContacted={lastContacted}
+                    imageSrc={imageSrc}
                     buttonId={contactVal.contactId}
                     editIt={this.clickTheEditButton}
                   />

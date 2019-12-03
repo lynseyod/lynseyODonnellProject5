@@ -2,7 +2,7 @@ import React from 'react';
 import firebase from './firebase.js';
 
 const AddressCard = (props) => {
-  const {firstName, lastName, contactMain, company, contactedVia, lastContacted, buttonId, editIt} = props;
+  const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc, buttonId, editIt} = props;
 
   const handleClick = (event) => {
     const thisThing = event.target.id;
@@ -14,14 +14,10 @@ const AddressCard = (props) => {
     dbRef.child(buttonId).remove();
   }
 
-  // const youSureBro = () => {
-
-  // }
-
   return (
     <div className="addressContainer">
       <div className="profilePic">
-        <img src="http://placekitten.com/200/200" alt="professional headshot"/>
+        <img src={imageSrc} alt="professional headshot"/>
       </div>
       <h2>{firstName + " " + lastName}</h2>
       <p className="contactInfo">{contactMain}</p>
