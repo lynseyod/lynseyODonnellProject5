@@ -5,11 +5,11 @@ const AddressCard = (props) => {
   const {firstName, lastName, contactMain, company, contactedVia, lastContacted, imageSrc, buttonId, editIt} = props;
 
   const handleClick = (event) => {
-    const thisThing = event.target.id;
-    editIt(thisThing);
+    const thingIClicked = event.target.id;
+    editIt(thingIClicked);
   }
 
-  const effThisBish = () => {
+  const deleteContact = () => {
     const dbRef = firebase.database().ref();
     dbRef.child(buttonId).remove();
   }
@@ -24,7 +24,7 @@ const AddressCard = (props) => {
       <p><span className="info">Company: </span>{company}</p>
       <p><span className="info">Connected Via: </span>{contactedVia}</p>
       <p><span className="info">Last Contacted: </span>{lastContacted}</p>
-      <button className="deleteThis" onClick={effThisBish}><i className="fas fa-times-circle"></i>Delete</button>
+      <button className="deleteThis" onClick={deleteContact}><i className="fas fa-times-circle"></i>Delete</button>
       <button className="update" onClick={handleClick} id={buttonId}><i className="fas fa-pencil-alt"></i>Update info</button>
     </div>
   )
